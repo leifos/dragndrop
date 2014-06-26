@@ -1,0 +1,11 @@
+keys.py
+*.pyc
+*.db
+*.xml
+.idea/*
+
+.idea
+*.pyc
+
+*.DS_Store
+.DS_Store
