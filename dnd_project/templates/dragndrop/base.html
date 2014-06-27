@@ -11,6 +11,15 @@
 Dragndrop
 <img src="{% static "img/dragon-logo-small.png" %}" alt="Dragndrop Logo" height=100 />
 
+<hr />
+<strong>User status: </strong>
+{% if user.is_authenticated %}
+Logged in as <strong>{{ user.username }}</strong> <a href="/accounts/logout/">Logout</a>
+{% else %}
+Not currently logged in! <a href="/accounts/login/">Login</a> | <a href="/accounts/register/">Register</a>
+{% endif %}
+
+<hr />
 
 {% block content_block%}
 
