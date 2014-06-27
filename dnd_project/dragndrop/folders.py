@@ -46,6 +46,7 @@ def get_folder_results(folder_id):
     f = get_folder(folder_id)
     if f:
         b = Bookmark.objects.filter(folder=f)
+        return b
     else:
         return None
 
@@ -60,7 +61,7 @@ def add_result_to_folder(folder_id, result):
     """
     f = get_folder(folder_id)
     if f:
-        b = Bookmark.objects.get_or_create(folder=f,title=result.title, url=result.url, summary=result.summary)
+        b = Bookmark.objects.get_or_create(folder=f,title=result.title, url=result.url, summary=result.summary)[0]
     return b
 
 def get_user_folders(user):

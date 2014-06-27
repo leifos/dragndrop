@@ -1,0 +1,16 @@
+{% extends 'dragndrop/base.html' %}
+
+{% load static %}
+
+{% block title %} - User Folder List{% endblock %}
+
+{% block content_block %}
+
+    {% for f in folders %}
+    <div>
+        <a href="/dnd/{{owner.username}}/{{f.name}}/">{{f.name}}</a>
+    </div>
+    {% endfor %}
+
+
+{% endblock %}
