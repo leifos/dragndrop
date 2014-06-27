@@ -18,8 +18,9 @@ def get_user(username):
 def return_json(request):
     json_response = False
     if request.method == 'GET':
-        if request.GET['type'] == 'json':
-            json_response = True
+        if 'type' in request.GET:
+            if request.GET['type'] == 'json':
+                json_response = True
     return json_response
 
 
