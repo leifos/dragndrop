@@ -31,7 +31,7 @@ class Dummy(Engine):
 
         rank = 1
         for x in result_list:
-            response.add_result(title=x, url='www.'+x+'.com', summary= x +' '+' ' + x, rank=rank)
+            response.add_result(title=x, url='www.'+x+'.com', summary= x +' '+' ' + x, rank=234)
             rank = rank + 1
             print rank
 
