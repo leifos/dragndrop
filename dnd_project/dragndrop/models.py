@@ -14,7 +14,7 @@ class Folder(models.Model):
     user = models.ForeignKey(User)
 
     def __unicode__(self):
-        return self.foldername
+        return self.name
 
 class Bookmark(models.Model):
     title = models.CharField(max_length=128, null=True, unique=False)
