@@ -1,6 +1,6 @@
 __author__ = 'leif'
-from ifind.search.engine import Engine
-from ifind.search.response import Response
+from find.search.engine import Engine
+from find.search.response import Response
 
 
 class Dummy(Engine):

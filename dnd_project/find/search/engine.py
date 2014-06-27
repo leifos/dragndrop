@@ -2,10 +2,10 @@ import time
 import datetime
 import importlib
 
-from ifind.search.query import Query
-from ifind.search.engines import ENGINE_LIST
-from ifind.search.exceptions import EngineLoadException
-from ifind.search.exceptions import InvalidQueryException
+from find.search.query import Query
+from find.search.engines import ENGINE_LIST
+from find.search.exceptions import EngineLoadException
+from find.search.exceptions import InvalidQueryException
 
 
 class Engine(object):

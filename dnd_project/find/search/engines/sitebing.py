@@ -1,8 +1,8 @@
 __author__ = 'leif'
 
 
-from ifind.search.engines.bing import Bing
-from ifind.search.query import Query
+from find.search.engines.bing import Bing
+from find.search.query import Query
 
 class Sitebing(Bing):
 
