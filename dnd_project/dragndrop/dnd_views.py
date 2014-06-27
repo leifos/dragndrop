@@ -12,6 +12,7 @@ def get_user(username):
         u = User.objects.get(username=username)
     except:
         u = None
+    return u
 
 def goto_url(request):
     return HttpResponse('goto url')
@@ -26,6 +27,7 @@ def user_folder_list(request,username):
     context = RequestContext(request)
     u = get_user(username)
 
+    print u, username
     flist = []
     if u:
         flist = get_user_folders(u)
@@ -33,6 +35,5 @@ def user_folder_list(request,username):
 
 
 def user_folder(request,username,folder_page_url):
-
 
     return HttpResponse('user folder')
