@@ -5,7 +5,6 @@ TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 STATIC_PATH = os.path.join(PROJECT_PATH,'static')
 DATABASE_PATH = os.path.join(PROJECT_PATH, 'dragndrop.db')
 
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 

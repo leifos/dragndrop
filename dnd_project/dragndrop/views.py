@@ -3,8 +3,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
-from ifind.search.engine import EngineFactory
-from ifind.search.query import Query
+from find.search.engine import EngineFactory
+from find.search.query import Query
 e = EngineFactory('dummy')
 
 
