@@ -1,3 +1,78 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
+from urlparse import urlparse
+from dragondrop.get_domain_from_url import getDomain
+import pickle
 
-# Create your models here.
+MAX_HISTORY_LENGTH = 30
+MAX_POPULAR_LENGTH = 30
+MAX_RECENTLY_ADDED_LENGTH = 30
+
+class Folder(models.Model):
+    name = models.CharField(max_length=128, null=False)
+    times_used = models.IntegerField(default=0)
+    user = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return self.foldername
+
+class Bookmark(models.Model):
+    title = models.CharField(max_length=128, null=True, unique=False)
+    summary = models.CharField(max_length=1024, null=True, unique=False)
+    url = models.URLField(unique=True)
+    clicks = models.IntegerField(default=0)
+    folder = models.ForeignKey(Folder)
+
+    def bdomain(self):
+        return getDomain(self.url)
+
+    def __unicode__(self):
+        return self.url
+
+class Profile(models.Model):
+    histories = models.TextField(null=True)
+    popular = models.TextField(null=True)
+    recently_added = models.TextField(null=True)
+    user = models.ForeignKey(User)
+
+    def get_history(self):
+        return pickle.loads(self.histories)
+
+    def get_popular(self):
+        return pickle.loads(self.popular)
+
+    def get_recently_added(self):
+        return pickle.loads(self.recently_added)
+
+    def __add_to_dictionary(self,field_inst,result,field_length):
+        """
+        result: is a dictionary containing the title, url, ...
+
+        this function adds as result to history;
+        to do this it's gonna save this back to data base
+        """
+
+        # 1. get history and unpickle it
+
+        if self.__dict__[field_inst] is None:
+            field_val = ""
+            hl = []
+        else:
+            field_val = self.__dict__[field_inst]
+            hl = pickle.loads(field_val)
+
+        if len(hl) == field_length:
+            hl.pop()
+
+        hl.insert(0,result)
+        self.__dict__[field_inst] = pickle.dumps(hl)
+
+    def add_to_recently_added(self, result):
+        self.__add_to_dictionary('recently_added', result, MAX_RECENTLY_ADDED_LENGTH)
+
+    def add_to_history(self, result):
+        self.__add_to_dictionary('histories', result, MAX_HISTORY_LENGTH)
+
+    def add_to_popular(self, result):
+        self.__add_to_dictionary('popular', result, MAX_POPULAR_LENGTH)
