@@ -8,7 +8,7 @@ urlpatterns = patterns('',
         url(r'^about', views.about, name='about'),
         url(r'^goto', dnd_views.goto_url, name='goto'),
         url(r'^dnd/$', dnd_views.user_list, name='list_of_users'),
-        url(r'^dnd/(?P<username>\w+)/(?P<folder_page_url>\w+)/$', dnd_views.user_folder, name='user_folder_view'),
+        url(r'^dnd/(?P<username>\w+)/(?P<folder_page_url>[a-zA-Z1-9\-]+)/$', dnd_views.user_folder, name='user_folder_view'),
         url(r'^dnd/(?P<username>\w+)/$', dnd_views.user_folder_list, name='user_folder_list'),
 
 )
