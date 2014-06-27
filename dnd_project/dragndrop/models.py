@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from urlparse import urlparse
-from dragondrop.get_domain_from_url import getDomain
 import pickle
 
 MAX_HISTORY_LENGTH = 30
@@ -25,7 +24,16 @@ class Bookmark(models.Model):
     folder = models.ForeignKey(Folder)
 
     def bdomain(self):
-        return getDomain(self.url)
+        """
+        Given a URL (e.g. http://www.bing.com/images), this function returns the domain
+        (e.g. bing.com). It's could probably be improved but hopefully works reasonably well.
+        """
+        domain = urlparse(self.url).netloc
+        domain_parts = domain.split('.')
+        if domain_parts[0] == "www":
+            return '.'.join(domain_parts[1:])
+        else:
+            return domain
 
     def __unicode__(self):
         return self.url
