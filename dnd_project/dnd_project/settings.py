@@ -12,6 +12,10 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+# For Django-Registration.
+# Specifies the number of days a new user has to activate their account before it expires.
+ACCOUNT_ACTIVATION_DAYS = 7
+
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -132,6 +136,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'dragndrop',
+    'registration'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
