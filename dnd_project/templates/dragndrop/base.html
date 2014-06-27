@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html>
+
+<head>
+    <title>Dragndrop {% block title %}{% endblock %}</title>
+</head>
+<body>
+
+Dragndrop
+<img src="{% static "img/dragon-logo-small.png" %}" alt="Dragndrop Logo" height=100 />
+
+
+{% block content_block%}
+
+{% endblock %}
+
+</body>
+</html>
