@@ -1,0 +1,16 @@
+{% extends 'dragndrop/base.html' %}
+
+{% load static %}
+
+{% block title %} - User List{% endblock %}
+
+{% block content_block %}
+
+ {% for u in all_users %}
+                    <div>
+                        <a href="/dnd/{{u.username}}">{{u.username}}</a>
+                    </div>
+                {% endfor %}
+
+
+{% endblock %}
