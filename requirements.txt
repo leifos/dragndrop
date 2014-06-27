@@ -1,2 +1,4 @@
 Django==1.5.4
+jsonpickle==0.7.1
+redis==2.10.1
 wsgiref==0.1.2
