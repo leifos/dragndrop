@@ -11,7 +11,7 @@ from find.search.response import Result
 from django.contrib.auth.models import User
 from models import Bookmark
 import re
-from folders import create_folder, get_user_folders, remove_folder, get_folder, add_result_to_folder, get_folder_results, get_user_folders, suggest_folders
+from folders import create_folder, get_user_folders, remove_folder, get_folder, add_result_to_folder, get_folder_results, get_user_folders, suggest_folders, get_user, get_bookmarks_given_folder_slug
 
 class SimpleTest(TestCase):
     def test_basic_addition(self):
@@ -51,6 +51,7 @@ class SimpleTest(TestCase):
 
     def test_get_results_of_folder(self):
         f1 = create_folder(self.ie,'test')
+        f2 = Folder(name="meow",user=self.ie)
 
         r1 = Result(title='r1',url='www.love.com',summary="Gambo Gambo")
         r2 = Result(title='r2',url='www.isinthe.com',summary="Gambo Gambo")
@@ -61,8 +62,12 @@ class SimpleTest(TestCase):
         b3 = add_result_to_folder(f1.id, r3)
 
         b4 = get_folder_results(f1.id)
+        b5 = get_folder_results(folder=f1)
+        b6 = get_folder_results(folder=f2)
 
         self.assertItemsEqual([b1, b2, b3], b4)
+        self.assertItemsEqual([b1, b2, b3], b5)
+        self.assertItemsEqual([],b6)
 
     def test_addition_of_results_to_folder(self):
         f1 = create_folder(self.ie,'test')
@@ -104,6 +109,12 @@ class SimpleTest(TestCase):
 
         self.assertItemsEqual([f1,f3], f5)
 
+    def test_get_user(self):
+        u2 = get_user("games")
+        u3 = get_user("james")
+
+        self.assertNotEquals(self.ie,u2)
+        self.assertEquals(self.ie,u3)
 
 class ReallySimpleTest(TestCase):
 
@@ -140,3 +151,10 @@ class ReallySimpleTest(TestCase):
         suggestions = suggest_folders(self.ie,'coin collectio')
 
         self.assertItemsEqual([self.f1, self.f2], suggestions)
+
+
+    def test_get_bookmarks_given_folder_slug(self):
+
+        b1 = get_bookmarks_given_folder_slug(self.ie,'test-everything')
+
+        self.assertItemsEqual(b1,[self.b5])
