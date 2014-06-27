@@ -1,6 +1,15 @@
+from registration.backends.simple.views import RegistrationView as BaseRegistrationView
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
+
+class RegistrationView(BaseRegistrationView):
+    """
+    Class inheriting from the django-registration simple RegistrationView.
+    This is required to redirect users to the correct URL after signing up...unfortunately.
+    """
+    def get_success_url(self, request, user):
+        return "/"  # When successfully registered, redirect the new user to root.
 
 admin.autodiscover()
 
@@ -12,10 +21,9 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    (r'^accounts/', include('registration.backends.simple.urls')),  # One-step registration backend. Easy!
+    url(r'^accounts/register/$', RegistrationView.as_view()),
+    url(r'^accounts/$', include('registration.backends.simple.urls')),  # One-step django-registration backend.
     url(r'^', include('dragndrop.urls')),
-
-
 )
 
 if settings.DEBUG:
