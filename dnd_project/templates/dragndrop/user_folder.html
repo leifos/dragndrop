@@ -6,9 +6,9 @@
 
 {% block content_block %}
 
-    {% for f in folders %}
+    {% for b in bookmarks %}
     <div>
-        <a href="/dnd/{{owner.username}}/{{f.slug}}/">{{f.name}}</a>
+        {{b.title}}
     </div>
     {% endfor %}
 

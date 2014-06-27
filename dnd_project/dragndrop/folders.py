@@ -121,15 +121,34 @@ def get_folder(folder_id):
     return f
 
 
-def get_folder_results(folder_id):
+def get_folder_results(folder_id=-1, folder=None):
     """ returns a list of Bookmarks
     """
-    f = get_folder(folder_id)
+    if folder:
+        f = folder
+    else:
+        if folder_id > 0:
+            f = get_folder(folder_id)
+        else:
+            f = None
     if f:
         b = Bookmark.objects.filter(folder=f)
         return b
     else:
         return None
+
+
+def get_bookmarks_given_folder_slug(user, slug):
+    """
+    returns the models.Folder object
+    """
+    try:
+        f = Folder.objects.get(user=user, slug=slug)
+    except:
+        f = None
+
+    bookmarks = get_folder_results(folder=f)
+    return bookmarks
 
 
 def add_result_to_folder(folder_id, result):

@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 import json
 
-from folders import get_user_folders, get_user
+from folders import get_user_folders, get_user, get_bookmarks_given_folder_slug
 
 
 
@@ -52,6 +52,10 @@ def user_folder_list(request,username):
         return render_to_response('dragndrop/user_folder_list.html', { 'owner': u, 'folders': flist }, context )
 
 
-def user_folder(request,username,folder_page_url):
+def user_folder(request,username, folder_page_url):
+    u = get_user(username)
+    context = RequestContext(request)
 
-    return HttpResponse('user folder')
+    bookmarks = get_bookmarks_given_folder_slug(u, folder_page_url)
+
+    return render_to_response('dragndrop/user_folder.html', { 'owner': u, 'bookmarks': bookmarks }, context )
