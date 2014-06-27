@@ -13,5 +13,12 @@ def index(request):
     #q = Query('one')
     #r = e.search(q)
     #print r
-
     return render_to_response('dragndrop/index.html', {}, context)
+
+
+def about(request):
+    return HttpResponse('About')
+
+
+def help(request):
+    return HttpResponse('Help')
