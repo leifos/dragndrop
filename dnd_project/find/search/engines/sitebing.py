@@ -1,6 +1,4 @@
 __author__ = 'leif'
-
-
 from find.search.engines.bing import Bing
 from find.search.query import Query
 
