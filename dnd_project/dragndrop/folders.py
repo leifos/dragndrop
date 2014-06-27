@@ -22,8 +22,7 @@ def remove_folder(folder_id):
     """
     f = get_folder(folder_id)
     if f:
-        f.delete
-        f.save()
+        f.delete()
 
 
 def suggest_folder(user, query):
