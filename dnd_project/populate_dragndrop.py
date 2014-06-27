@@ -6,11 +6,23 @@ def populate():
     Wen = User.objects.create_user('Wen',None, 'password')
     Wen.save()
     f_Misc_Trees_and_Graphs_Wen = add_folder(name='Misc Trees and Graphs',times_used=4,user=Wen)
+    f_1_Wen = add_folder(name='Folder 1',times_used=4,user=Wen)
+    f_2_Wen = add_folder(name='Folder 2',times_used=4,user=Wen)
+    f_3_Wen = add_folder(name='Folder 3',times_used=4,user=Wen)
+    f_4_Wen = add_folder(name='Folder 4',times_used=4,user=Wen)
+    f_5_Wen = add_folder(name='Folder 5',times_used=4,user=Wen)
     f_Online_Editors_Jean = add_folder(name='Online Editors',times_used=4,user=Jean)
     google = add_bookmark("Google", "A search engine", "http://www.google.com", 2, f_Misc_Trees_and_Graphs_Wen)
     yahoo = add_bookmark("Yahoo!", "An old website", "http://www.yahoo.com", 4, f_Misc_Trees_and_Graphs_Wen)
     github = add_bookmark("Github", "A code site", "http://www.github.com", 5, f_Online_Editors_Jean)
+    bookmark1 = add_bookmark("cat", "search for cat", "https://www.google.com/?pws=0&q=cat", 5, f_1_Wen)
+    bookmark2 = add_bookmark("dog", "search for dog", "https://www.google.com/?pws=0&q=dog", 5, f_1_Wen)
+    bookmark3 = add_bookmark("horse", "search for horse", "https://www.google.com/?pws=0&q=horse", 5, f_1_Wen)
+    bookmark4 = add_bookmark("cow", "search for cow", "https://www.google.com/?pws=0&q=cow", 5, f_1_Wen)
+    bookmark5 = add_bookmark("fish", "search for fish", "https://www.google.com/?pws=0&q=fish", 5, f_1_Wen)
 
+
+https://www.google.com/?pws=0&q=cat
 
 def add_bookmark(title, summary, url, clicks, folder):
     bm = Bookmark.objects.get_or_create(title=title, summary=summary, url=url,
