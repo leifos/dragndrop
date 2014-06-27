@@ -22,8 +22,6 @@ def populate():
     bookmark5 = add_bookmark("fish", "search for fish", "https://www.google.com/?pws=0&q=fish", 5, f_1_Wen)
 
 
-https://www.google.com/?pws=0&q=cat
-
 def add_bookmark(title, summary, url, clicks, folder):
     bm = Bookmark.objects.get_or_create(title=title, summary=summary, url=url,
                                         clicks=clicks, folder=folder)[0]
