@@ -15,6 +15,7 @@ ADMINS = (
 # For Django-Registration.
 # If True, registrations are permitted; otherwise, users cannot sign up.
 REGISTRATION_OPEN = True
+LOGIN_REDIRECT_URL = '/'
 
 MANAGERS = ADMINS
 
