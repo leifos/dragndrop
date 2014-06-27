@@ -13,8 +13,8 @@ ADMINS = (
 )
 
 # For Django-Registration.
-# Specifies the number of days a new user has to activate their account before it expires.
-ACCOUNT_ACTIVATION_DAYS = 7
+# If True, registrations are permitted; otherwise, users cannot sign up.
+REGISTRATION_OPEN = True
 
 MANAGERS = ADMINS
 

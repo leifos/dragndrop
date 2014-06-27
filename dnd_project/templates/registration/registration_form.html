@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<h1>Registration Form...</h1>
+<strong>Needs styled and templated!</strong>
+
+<form method="post" action=".">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <input type="submit" value="{% trans 'Submit' %}" />
+</form>
