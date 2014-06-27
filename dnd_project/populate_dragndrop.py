@@ -1,10 +1,8 @@
 import os
 
 def populate():
-    Jean = User.objects.create_user('Jean',None, 'password')
-    Jean.save()
-    Wen = User.objects.create_user('Wen',None, 'password')
-    Wen.save()
+    Jean = create_user("Jean")
+    Wen = create_user("Wen")
     f_Misc_Trees_and_Graphs_Wen = add_folder(name='Misc Trees and Graphs',times_used=4,user=Wen)
     f_1_Wen = add_folder(name='Folder 1',times_used=4,user=Wen)
     f_2_Wen = add_folder(name='Folder 2',times_used=4,user=Wen)
@@ -22,12 +20,21 @@ def populate():
     bookmark5 = add_bookmark("fish", "search for fish", "https://www.google.com/?pws=0&q=fish", 5, f_1_Wen)
 
 
+def create_user(user_name):
+    print "creating or getting user: " + user_name + " with password password"
+    user, _ = User.objects.get_or_create(username=user_name)
+    user.set_password("password")
+    user.save()
+    return user
+
 def add_bookmark(title, summary, url, clicks, folder):
+    print "creating or getting bookmark: " + title + " in folder " + folder.name
     bm = Bookmark.objects.get_or_create(title=title, summary=summary, url=url,
                                         clicks=clicks, folder=folder)[0]
     return bm
 
 def add_folder(name, times_used, user):
+    print "creating or getting folder: " + name + " belonging to " + user.username
     f = Folder.objects.get_or_create(name=name, times_used=times_used, user=user)[0]
     return f
 

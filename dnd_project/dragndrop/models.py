@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from urlparse import urlparse
@@ -10,9 +11,14 @@ MAX_RECENTLY_ADDED_LENGTH = 30
 
 class Folder(models.Model):
     name = models.CharField(max_length=128, null=False)
+    slug = models.SlugField()
     times_used = models.IntegerField(default=0)
     user = models.ForeignKey(User)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Folder, self).save(*args, **kwargs)
+    
     def __unicode__(self):
         return self.name
 
