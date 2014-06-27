@@ -6,6 +6,14 @@ from django.contrib.auth.models import User
 import re
 from django.db.models import Q
 
+
+def get_user(username):
+    try:
+        u = User.objects.get(username=username)
+    except:
+        u = None
+    return u
+
 def create_folder(user, folder_name):
     """
     Args:

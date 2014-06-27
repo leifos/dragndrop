@@ -6,14 +6,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 import json
 
-from folders import get_user_folders
+from folders import get_user_folders, get_user
 
-def get_user(username):
-    try:
-        u = User.objects.get(username=username)
-    except:
-        u = None
-    return u
+
 
 def return_json(request):
     json_response = False

@@ -105,3 +105,38 @@ class SimpleTest(TestCase):
         self.assertItemsEqual([f1,f3], f5)
 
 
+class ReallySimpleTest(TestCase):
+
+    def setUp(self):
+        self.ie = User(username='james')
+        self.ie.save()
+        self.f1 = create_folder(self.ie,'test this')
+        self.f2 = create_folder(self.ie,'test that')
+        self.f3 = create_folder(self.ie,'test everything')
+
+        self.r1 = Result(title='r1',url='www.love.com',summary="Gambo Love")
+        self.r2 = Result(title='r2',url='www.isinthe.com',summary="Gambo Food")
+        self.r3 = Result(title=' coin gambo collection', url='www.air.com',summary="Gambo Money")
+        self.r4 = Result(title='gambo coin collection',url='www.james.com',summary="Gambo Food")
+        self.r5 = Result(title='r5',url='www.ryanair.com',summary="Gambo Money")
+
+        self.b1 = add_result_to_folder(self.f1.id, self.r1)
+        self.b2 = add_result_to_folder(self.f1.id, self.r2)
+        self.b3 = add_result_to_folder(self.f1.id, self.r3)
+        self.b4 = add_result_to_folder(self.f2.id, self.r4)
+        self.b5 = add_result_to_folder(self.f3.id, self.r5)
+
+    def test_summary_suggestion(self):
+        suggestions = suggest_folders(self.ie,'money')
+
+        self.assertItemsEqual([self.f1,self.f3], suggestions)
+
+    def test_title_suggestion(self):
+        suggestions = suggest_folders(self.ie,'coin')
+
+        self.assertItemsEqual([self.f1], suggestions)
+
+    def test_title_suggestion(self):
+        suggestions = suggest_folders(self.ie,'coin collectio')
+
+        self.assertItemsEqual([self.f1, self.f2], suggestions)
