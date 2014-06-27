@@ -10,7 +10,7 @@ from find.search.exceptions import InvalidQueryException
 
 class Engine(object):
     """
-    Abstract class representing an ifind search engine.
+    Abstract class representing an find search engine.
 
     """
     def __init__(self, throttle=0, proxies=None):
@@ -66,7 +66,7 @@ class Engine(object):
         # raise exception if search argument isn't an ifind Query object
         if not isinstance(query, Query):
             raise InvalidQueryException('Engine', 'Expected type {}'
-                                        .format("<class 'ifind.search.query.Query'>"))
+                                        .format("<class 'find.search.query.Query'>"))
 
         self.num_requests +=1
         # check query in cache and return if there
@@ -172,7 +172,7 @@ class EngineFactory(object):
         """
         # if engine in subclass list, return instantiation
         if engine.lower() in ENGINE_LIST:
-            module = importlib.import_module('ifind.search.engines.{}'.format(engine.lower()))
+            module = importlib.import_module('find.search.engines.{}'.format(engine.lower()))
             return getattr(module, engine.lower().title())(**kwargs)
 
         # if 'engine' defined but not in supported list

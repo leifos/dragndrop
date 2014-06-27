@@ -2,6 +2,6 @@
 Search Module API
 
 """
-from ifind.search.engine import EngineFactory
-from ifind.search.query import Query
-from ifind.search.response import Response
+from find.search.engine import EngineFactory
+from find.search.query import Query
+from find.search.response import Response
